@@ -1,14 +1,21 @@
 resource "aws_instance" "cicdtest" {
   ami           = lookup(var.AMIS, var.AWS_REGION)
   instance_type = "t2.micro"
-  key_name      = aws_key_pair.cicd.key_name
 
-  subnet_id = aws_subnet.main-public-1.id
+  # ssh key pair
+  key_name = aws_key_pair.cicd.key_name
 
+  # VPC subnet id
+  subnet_id = var.SUBNET_MAIN_PUBLIC_1
+
+  # attach security group id
   vpc_security_group_ids = [aws_security_group.from_tokyo.id]
 
+  # role
+  iam_instance_profile = aws_iam_instance_profile.codedeploy-profile.name
+
   tags = {
-    name = "CICD instance"
+    name = "CICDinstance"
   }
 
   # Root ebs size
@@ -42,5 +49,9 @@ resource "aws_instance" "cicdtest" {
     user        = var.INSTANCE_USERNAME
     private_key = file(var.PATH_PRIVATE_KEY)
   }
+}
+
+output "ip" {
+  value = aws_instance.cicdtest.public_ip
 }
 

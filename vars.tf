@@ -6,12 +6,18 @@ variable "AWS_REGION" {
   default = "ap-northeast-1"
 }
 
+variable "VPC_ID" {}
+
+variable "SUBNET_MAIN_PUBLIC_1" {}
+
 variable "AMIS" {
   type = map(string)
   default = {
-    ap-northeast-1 = "ami-0318ecd6d05daa212"
+    ap-northeast-1 = "ami-0f310fced6141e627"
   }
 }
+
+
 
 variable "INSTANCE_USERNAME" {
   default = "ec2-user"

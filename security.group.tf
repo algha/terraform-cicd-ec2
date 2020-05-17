@@ -4,7 +4,7 @@ data "aws_ip_ranges" "tokyo_ec2" {
 }
 
 resource "aws_security_group" "from_tokyo" {
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.VPC_ID
   name        = "from_tokyo"
   description = "this security group only belongs to cicd pipeline on ec2."
 
