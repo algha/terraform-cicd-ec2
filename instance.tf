@@ -11,6 +11,13 @@ resource "aws_instance" "cicdtest" {
     name = "CICD instance"
   }
 
+  # Root ebs size
+  root_block_device {
+    volume_size           = 20
+    volume_type           = "gp2"
+    delete_on_termination = true
+  }
+
 
   provisioner "file" {
     source      = "scripts/script.sh"
