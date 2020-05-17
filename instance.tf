@@ -1,10 +1,16 @@
 resource "aws_instance" "cicdtest" {
-  name          = "CICD test"
   ami           = lookup(var.AMIS, var.AWS_REGION)
   instance_type = "t2.micro"
   key_name      = aws_key_pair.cicd.key_name
 
+  subnet_id = aws_subnet.main-public-1.id
+
   vpc_security_group_ids = [aws_security_group.from_tokyo.id]
+
+  tags = {
+    name = "CICD instance"
+  }
+
 
   provisioner "file" {
     source      = "scripts/script.sh"

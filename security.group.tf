@@ -4,7 +4,9 @@ data "aws_ip_ranges" "tokyo_ec2" {
 }
 
 resource "aws_security_group" "from_tokyo" {
-  name = "from_tokyo"
+  vpc_id      = aws_vpc.main.id
+  name        = "from_tokyo"
+  description = "this security group only belongs to cicd pipeline on ec2."
 
   egress {
     from_port   = 0
