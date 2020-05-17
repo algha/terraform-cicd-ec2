@@ -3,7 +3,7 @@
 this generates public and private keys
 
 
-# switch aws profile:
+## switch aws profile:
   export AWS_DEFAULT_PROFILE=[name]
 ### confirm aws profile:
   aws s3 ls

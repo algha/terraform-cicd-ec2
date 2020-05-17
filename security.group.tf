@@ -16,9 +16,9 @@ resource "aws_security_group" "from_tokyo" {
   dynamic "ingress" {
     for_each = [22, 80, 443]
     content {
-      from_port = ingress.value
-      to_port   = ingress.value
-      protocol  = "tcp"
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
       cidr_blocks = [ingress.value == 22 ? "118.86.160.25/32" : "0.0.0.0/0"]
     }
   }

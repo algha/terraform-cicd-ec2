@@ -1,4 +1,5 @@
 resource "aws_instance" "cicdtest" {
+  name          = "CICD test"
   ami           = lookup(var.AMIS, var.AWS_REGION)
   instance_type = "t2.micro"
   key_name      = aws_key_pair.cicd.key_name
@@ -21,7 +22,7 @@ resource "aws_instance" "cicdtest" {
       "sudo /tmp/script.sh"
     ]
   }
-  
+
   connection {
     host        = coalesce(self.public_ip, self.private_ip)
     type        = "ssh"
