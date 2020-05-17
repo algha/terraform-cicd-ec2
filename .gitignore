@@ -1,0 +1,4 @@
+
+terraform.tfvars
+.terraform/plugins/darwin_amd64/terraform-provider-aws_v2.62.0_x4
+.terraform/terraform.tfstate
