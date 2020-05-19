@@ -8,16 +8,17 @@ resource "aws_codedeploy_deployment_group" "main" {
   deployment_group_name = "Sample_DepGroup"
   service_role_arn      = aws_iam_role.codedeploy_service.arn
 
-  deployment_config_name = "CodeDeployDefault.OneAtATime" # AWS defined deployment config
+  # AWS defined deployment config
+  deployment_config_name = "CodeDeployDefault.OneAtATime"
 
   ec2_tag_set {
     ec2_tag_filter {
-      key   = "Name"
+      key   = "name"
       type  = "KEY_AND_VALUE"
       value = "CICDinstance"
     }
   }
-  
+
 
   # trigger a rollback on deployment failure event
   auto_rollback_configuration {

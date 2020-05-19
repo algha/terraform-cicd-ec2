@@ -32,3 +32,6 @@ variable "PATH_PRIVATE_KEY" {
 }
 
 
+variable "GITHUB_TOKEN" {
+  default = ""
+}

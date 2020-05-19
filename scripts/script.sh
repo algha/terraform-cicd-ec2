@@ -13,7 +13,7 @@ sudo chmod +x ./install
 sudo ./install auto
 
 # install nginx
-sudo yum -y install nginx
+# sudo yum -y install nginx
 
 # make sure nginx is started
-sudo service nginx start
+# service nginx start
