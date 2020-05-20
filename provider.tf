@@ -4,6 +4,11 @@ provider "aws" {
   region     = var.AWS_REGION
 }
 
+provider "github" {
+  token        = var.GITHUB_TOKEN
+  organization = "algha"
+}
+
 data "aws_availability_zones" "available" {
 }
 

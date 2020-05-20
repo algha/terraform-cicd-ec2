@@ -6,10 +6,10 @@ resource "aws_codepipeline" "codepipeline" {
     location = aws_s3_bucket.codepipeline_bucket.bucket
     type     = "S3"
 
-    # encryption_key {
-    #   id   = data.aws_kms_alias.s3kmskey.arn
-    #   type = "KMS"
-    # }
+    encryption_key {
+      id   = aws_kms_alias.demo-artifacts.arn
+      type = "KMS"
+    }
   }
 
   stage {
@@ -21,12 +21,12 @@ resource "aws_codepipeline" "codepipeline" {
       owner    = "ThirdParty"
       provider = "GitHub"
       version  = "1"
-      # output_artifacts = ["source_output"]
+      output_artifacts = ["source_output"]
 
       configuration = {
         OAuthToken = var.GITHUB_TOKEN
         Owner  = "algha"
-        Repo   = "algha/aws-codedeploy-samples"
+        Repo   = "aws-codedeploy-samples"
         Branch = "master"
       }
     }
@@ -36,18 +36,18 @@ resource "aws_codepipeline" "codepipeline" {
     name = "Deploy"
 
     action {
-      name     = "DeployToEC2"
+      name     = "Deploy"
       category = "Deploy"
       owner    = "AWS"
       provider = "CodeDeploy"
-      # input_artifacts = ["demo-docker-build"]
+      input_artifacts = ["source_output"]
       version = "1"
 
       configuration = {
         ApplicationName                = aws_codedeploy_app.main.name
         DeploymentGroupName            = aws_codedeploy_deployment_group.main.deployment_group_name
-        TaskDefinitionTemplateArtifact = "demo-docker-build"
-        AppSpecTemplateArtifact        = "demo-docker-build"
+        # TaskDefinitionTemplateArtifact = "demo-docker-build"
+        # AppSpecTemplateArtifact        = "demo-docker-build"
       }
     }
   }

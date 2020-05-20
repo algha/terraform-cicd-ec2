@@ -29,18 +29,7 @@ data "aws_iam_policy_document" "demo-codepipeline-role-policy" {
       "s3:*",
     ]
     resources = [
-      aws_s3_bucket.codepipeline_bucket.arn,
-      "${aws_s3_bucket.codepipeline_bucket.arn}/*",
-    ]
-  }
-  statement {
-    effect = "Allow"
-    actions = [
-      "codebuild:BatchGetBuilds",
-      "codebuild:StartBuild",
-    ]
-    resources = [
-      "*",
+      "*"
     ]
   }
   statement {
@@ -61,29 +50,16 @@ data "aws_iam_policy_document" "demo-codepipeline-role-policy" {
       "kms:ReEncrypt*",
       "kms:Decrypt",
     ]
-    # resources = [
-    #   aws_kms_key.demo-artifacts.arn,
-    # ]
-  }
-  statement {
-    effect = "Allow"
-    actions = [
-      "codecommit:UploadArchive",
-      "codecommit:Get*",
-      "codecommit:BatchGet*",
-      "codecommit:Describe*",
-      "codecommit:BatchDescribe*",
-      "codecommit:GitPull",
+    resources = [
+      aws_kms_key.demo-artifacts.arn,
     ]
-    # resources = [
-    #   aws_codecommit_repository.demo.arn,
-    # ]
   }
   statement {
     effect = "Allow"
     actions = [
       "codedeploy:*",
-      "ecs:*",
+      "ec2:*",
+      "s3:*",
     ]
     resources = [
       "*",
@@ -98,7 +74,3 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
   policy = data.aws_iam_policy_document.demo-codepipeline-role-policy.json
 
 }
-
-# data "aws_kms_alias" "s3kmskey" {
-#   name = "alias/codepipeline"
-# }
