@@ -20,4 +20,4 @@ this generates public and private keys
 when we use s3 as backend terraform state, it is batter to switch on s3 bucket enable versioning
 
 ssh login:
-  ssh -i keys/cicd ec2-user@xxx.xxx.xxx.xxx
+  ssh -i cicd ec2-user@xxx.xxx.xxx.xxx

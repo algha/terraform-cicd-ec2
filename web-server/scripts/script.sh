@@ -12,7 +12,6 @@ curl -O https://aws-codedeploy-ap-northeast-1.s3.amazonaws.com/latest/install
 sudo chmod +x ./install
 sudo ./install auto
 
-sudo mkdir /var/www/html
 # install nginx
 # sudo yum -y install nginx
 

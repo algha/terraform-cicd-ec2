@@ -1,12 +1,12 @@
-data "aws_ip_ranges" "tokyo_ec2" {
+data "aws_ip_ranges" "IPRanges" {
   regions  = ["ap-northeast-1"]
   services = ["ec2"]
 }
 
-resource "aws_security_group" "from_tokyo" {
-  vpc_id      = var.VPC_ID
-  name        = "from_tokyo"
-  description = "this security group only belongs to cicd pipeline on ec2."
+resource "aws_security_group" "ec2-instance" {
+  vpc_id      = var.VpcId
+  name        = "Security-Group-${var.AppName}"
+  description = "this security group only belongs to ${var.AppName}."
 
   egress {
     from_port   = 0
@@ -26,7 +26,9 @@ resource "aws_security_group" "from_tokyo" {
   }
 
   tags = {
-    CreateDate = data.aws_ip_ranges.tokyo_ec2.create_date
-    SyncToken  = data.aws_ip_ranges.tokyo_ec2.sync_token
+    CreateDate = data.aws_ip_ranges.IPRanges.create_date
+    SyncToken  = data.aws_ip_ranges.IPRanges.sync_token
+    name = "security-group-${var.AppName}"
+    app  = var.AppName
   }
 }
