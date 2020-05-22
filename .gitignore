@@ -1,2 +1,5 @@
 terraform.tfvars
 .terraform
+./web-server/keys
+web-server/keys/secret.key
+web-server/keys/secret.pub

@@ -13,6 +13,7 @@ resource "aws_iam_role" "codedeploy" {
 }
 
 resource "aws_iam_role_policy" "codedeploy" {
+  name = "codedeploy-policy-${var.AppName}"
   role   = aws_iam_role.codedeploy.id
   policy = data.template_file.codedeploy-policy.rendered
 }

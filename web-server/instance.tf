@@ -40,8 +40,6 @@ resource "aws_instance" "main" {
     destination = "/tmp/script.sh"
   }
 
-  provisioner "local-exec" {}
-
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/script.sh",

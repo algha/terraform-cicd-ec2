@@ -18,23 +18,14 @@
     },
     {
       "Action": [
-        "codecommit:CancelUploadArchive",
-        "codecommit:GetBranch",
-        "codecommit:GetCommit",
-        "codecommit:GetUploadArchiveStatus",
-        "codecommit:UploadArchive"
+        "codecommit:*"
       ],
       "Resource": "*",
       "Effect": "Allow"
     },
     {
       "Action": [
-        "codedeploy:CreateDeployment",
-        "codedeploy:GetApplication",
-        "codedeploy:GetApplicationRevision",
-        "codedeploy:GetDeployment",
-        "codedeploy:GetDeploymentConfig",
-        "codedeploy:RegisterApplicationRevision"
+        "codedeploy:*"
       ],
       "Resource": "*",
       "Effect": "Allow"
