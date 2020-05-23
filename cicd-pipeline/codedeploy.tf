@@ -11,12 +11,12 @@ resource "aws_codedeploy_deployment_group" "main" {
 
   ec2_tag_set {
     ec2_tag_filter {
-      key   = "app"
+      key   = "App"
       type  = "KEY_AND_VALUE"
       value = var.AppName
     }
   }
-  
+
   auto_rollback_configuration {
     enabled = true
     events = [

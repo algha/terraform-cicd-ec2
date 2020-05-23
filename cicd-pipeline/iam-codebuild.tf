@@ -12,7 +12,7 @@ resource "aws_iam_role" "codebuild" {
 }
 
 resource "aws_iam_role_policy" "codebuild" {
-  name = "codebuild-policy-${var.AppName}"
+  name   = "codebuild-policy-${var.AppName}"
   role   = aws_iam_role.codebuild.id
   policy = data.template_file.codebuild-policy.rendered
 }

@@ -5,7 +5,7 @@ data "aws_ip_ranges" "IPRanges" {
 
 resource "aws_security_group" "ec2-instance" {
   vpc_id      = var.VpcId
-  name        = "Security-Group-${var.AppName}"
+  name        = "security-group-${var.AppName}"
   description = "this security group only belongs to ${var.AppName}."
 
   egress {
@@ -28,7 +28,7 @@ resource "aws_security_group" "ec2-instance" {
   tags = {
     CreateDate = data.aws_ip_ranges.IPRanges.create_date
     SyncToken  = data.aws_ip_ranges.IPRanges.sync_token
-    name = "security-group-${var.AppName}"
-    app  = var.AppName
+    Name       = "security-group-${var.AppName}"
+    App        = var.AppName
   }
 }

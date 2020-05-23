@@ -1,7 +1,12 @@
+
+variable "AppName" {
+  default = "chronote"
+}
+
 module "web-server" {
   source = "./web-server"
 
-  AppName          = "cicd"
+  AppName          = var.AppName
   AMI              = var.AMI
   InstanceType     = "t2.micro"
   InstanceUsername = "ec2-user"
@@ -12,7 +17,7 @@ module "web-server" {
 module "cicd-pipeline" {
   source = "./cicd-pipeline"
 
-  AppName          = "cicd"
+  AppName          = var.AppName
   Company          = "algha"
   SourceOAuthToken = var.SourceOAuthToken
   SourceOwner      = "algha"

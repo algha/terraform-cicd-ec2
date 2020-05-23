@@ -16,18 +16,18 @@ resource "aws_codepipeline" "main" {
     name = "Source"
 
     action {
-      name     = "Source"
-      category = "Source"
-      owner    = "ThirdParty"
-      provider = "GitHub"
-      version  = "1"
+      name             = "Source"
+      category         = "Source"
+      owner            = "ThirdParty"
+      provider         = "GitHub"
+      version          = "1"
       output_artifacts = ["source_output"]
 
       configuration = {
         OAuthToken = var.SourceOAuthToken
-        Owner  = var.SourceOwner
-        Repo   = var.SourceRepository
-        Branch = var.SourceBranch
+        Owner      = var.SourceOwner
+        Repo       = var.SourceRepository
+        Branch     = var.SourceBranch
       }
     }
   }
@@ -36,13 +36,13 @@ resource "aws_codepipeline" "main" {
     name = "Build"
 
     action {
-      name = "Build"
-      category = "Build"
-      owner = "AWS"
-      provider = "CodeBuild"
-      input_artifacts = ["source_output"]
+      name             = "Build"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
       output_artifacts = ["build_output"]
-      version = "1"
+      version          = "1"
 
       configuration = {
         ProjectName = aws_codebuild_project.main.name
@@ -55,12 +55,12 @@ resource "aws_codepipeline" "main" {
     name = "Deploy"
 
     action {
-      name     = "Deploy"
-      category = "Deploy"
-      owner    = "AWS"
-      provider = "CodeDeploy"
+      name            = "Deploy"
+      category        = "Deploy"
+      owner           = "AWS"
+      provider        = "CodeDeploy"
       input_artifacts = ["build_output"]
-      version = "1"
+      version         = "1"
 
       configuration = {
         ApplicationName     = aws_codedeploy_app.main.name

@@ -12,6 +12,11 @@ curl -O https://aws-codedeploy-ap-northeast-1.s3.amazonaws.com/latest/install
 sudo chmod +x ./install
 sudo ./install auto
 
+# Install stress
+# sudo amazon-linux-extras install epel -y
+# sudo yum install stress -y
+# stress --cpu 2 --timeout 300
+
 # install nginx
 # sudo yum -y install nginx
 

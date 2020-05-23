@@ -1,24 +1,17 @@
 resource "aws_instance" "main" {
   ami           = var.AMI
   instance_type = var.InstanceType
-
-  monitoring = true
-
-  # ssh key pair
   key_name = aws_key_pair.main.key_name
-
-  # VPC subnet id
   subnet_id = var.SubnetId
-
-  # attach security group id
   vpc_security_group_ids = [aws_security_group.ec2-instance.id]
-
   # role
   iam_instance_profile = aws_iam_instance_profile.ec2-instance.id
 
+  monitoring = true
+
   tags = {
-    name = "ec2-${var.AppName}"
-    app = var.AppName
+    Name = "ec2-${var.AppName}"
+    App  = var.AppName
   }
 
   # Root ebs size

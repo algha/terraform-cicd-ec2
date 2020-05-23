@@ -8,12 +8,12 @@ data "template_file" "codepipeline-policy" {
 }
 
 resource "aws_iam_role" "codepipeline" {
-  name = "role-codepipeline-${var.AppName}"
+  name               = "role-codepipeline-${var.AppName}"
   assume_role_policy = data.template_file.codepipeline-role.rendered
 }
 
 resource "aws_iam_role_policy" "codepipeline" {
-  name = "codepipeline-policy-${var.AppName}"
-  role = aws_iam_role.codepipeline.id
+  name   = "codepipeline-policy-${var.AppName}"
+  role   = aws_iam_role.codepipeline.id
   policy = data.template_file.codepipeline-policy.rendered
 }
